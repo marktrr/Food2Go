@@ -26,8 +26,6 @@ public class SignIn extends AppCompatActivity implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signin);
 
-        ActionBar actionBar = getSupportActionBar();
-
         phoneNumber = (EditText) findViewById(R.id.editPhone);
         password = (EditText) findViewById(R.id.editPassword);
         btnSignIn = (Button) findViewById(R.id.btnSubmitSignIn);
