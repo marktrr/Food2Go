@@ -6,8 +6,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.food2go.Model.Users;
@@ -26,6 +26,8 @@ public class SignIn extends AppCompatActivity implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signin);
 
+        ActionBar actionBar = getSupportActionBar();
+
         phoneNumber = (EditText) findViewById(R.id.editPhone);
         password = (EditText) findViewById(R.id.editPassword);
         btnSignIn = (Button) findViewById(R.id.btnSubmitSignIn);
@@ -40,38 +42,39 @@ public class SignIn extends AppCompatActivity implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        if(v.getId() == R.id.btnSubmitSignIn) {
-            // set message for sign in process
-            final ProgressDialog dialog = new ProgressDialog(SignIn.this);
-            dialog.setMessage("Sign in...");
-            dialog.show();
+        switch (v.getId()) {
+            case R.id.btnSubmitSignIn:
+                // set message for sign in process
+                final ProgressDialog dialog = new ProgressDialog(SignIn.this);
+                dialog.setMessage("Sign in...");
+                dialog.show();
 
-            users.addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(DataSnapshot dataSnapshot) {
-                    // if user exist
-                    if(dataSnapshot.child(phoneNumber.getText().toString()).exists()) {
-                        dialog.dismiss();
-                        // Get User Information
-                        Users user = dataSnapshot.child(phoneNumber.getText().toString()).getValue(Users.class);
-                        if(user.getPassword().equals(password.getText().toString())) {
-                            Toast.makeText(SignIn.this, "Sign in successfully!", Toast.LENGTH_SHORT).show();
+                users.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        // if user exist
+                        if(dataSnapshot.child(phoneNumber.getText().toString()).exists()) {
+                            dialog.dismiss();
+                            // Get User Information
+                            Users user = dataSnapshot.child(phoneNumber.getText().toString()).getValue(Users.class);
+                            if(user.getPassword().equals(password.getText().toString())) {
+                                Toast.makeText(SignIn.this, "Sign in successfully!", Toast.LENGTH_SHORT).show();
+                            }
+                            else {
+                                Toast.makeText(SignIn.this, "Incorrect username/phone or password", Toast.LENGTH_SHORT).show();
+                            }
                         }
                         else {
-                            Toast.makeText(SignIn.this, "Incorrect username/phone or password", Toast.LENGTH_SHORT).show();
+                            dialog.dismiss();
+                            Toast.makeText(SignIn.this, "User not exist", Toast.LENGTH_SHORT).show();
                         }
                     }
-                    else {
-                        dialog.dismiss();
-                        Toast.makeText(SignIn.this, "User not exist", Toast.LENGTH_SHORT).show();
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
                     }
-                }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                }
-            });
+                });
         }
     }
 }
