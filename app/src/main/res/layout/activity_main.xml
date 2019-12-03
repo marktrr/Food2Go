@@ -14,14 +14,14 @@
         android:layout_alignParentBottom="true"
         android:weightSum="2">
 
-        <Button
-            android:id="@+id/btnSignUp"
-            style="@style/btnSignUp">
-        </Button>
+      <Button
+          android:id="@+id/btnSignUp"
+          style="@style/btnSignUp"
+          android:layout_width="wrap_content"></Button>
 
-        <Button
-            android:id="@+id/btnSignIn"
-            style="@style/btnSignIn">
-        </Button>
+      <Button
+          android:id="@+id/btnSignIn"
+          style="@style/btnSignIn"
+          android:layout_width="wrap_content"></Button>
     </LinearLayout>
 </RelativeLayout>
