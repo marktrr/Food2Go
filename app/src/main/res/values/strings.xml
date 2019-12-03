@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">Food2Go</string>
+    <string name="homepage">Home</string>
+    <string name="yourOrder">Your Orders</string>
+    <string name="profile">Profile</string>
+    <string name="login">Login</string>
+    <string name="logout">Logout</string>
+    <string name="aboutus">About Us</string>
+    <string name="signup">Sign up</string>
+    <string name="signin">Sign in</string>
 </resources>
