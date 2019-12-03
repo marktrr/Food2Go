@@ -16,7 +16,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".SignIn"
             android:parentActivityName=".MainActivity">
@@ -25,7 +24,5 @@
             android:name=".SignUp"
             android:parentActivityName=".MainActivity">>
         </activity>
-
     </application>
-
 </manifest>
