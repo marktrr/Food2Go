@@ -8,7 +8,7 @@
     <string name="aboutus">About Us</string>
     <string name="signup">Sign up</string>
     <string name="signin">Sign in</string>
-    <string name="password_hint">Please enter your password</string>
-    <string name="name_hint">Please enter your name</string>
-    <string name="phone_hint">Please enter your phone number</string>
+    <string name="password_label">Password:</string>
+    <string name="name_label">Name:</string>
+    <string name="phone_label">Phone Number:</string>
 </resources>
