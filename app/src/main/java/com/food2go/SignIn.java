@@ -27,26 +27,26 @@ public class SignIn extends AppCompatActivity implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signin);
 
-        phoneNumber = (EditText) findViewById(R.id.editPhone);
-        password = (EditText) findViewById(R.id.editPassword);
-        btnSignIn = (Button) findViewById(R.id.btnSubmitSignIn);
+        phoneNumber = findViewById(R.id.editPhone);
+        password = findViewById(R.id.editPassword);
+        btnSignIn = findViewById(R.id.btnSubmitSignIn);
 
         btnSignIn.setOnClickListener(this);
 
         // declare firebase database
         FirebaseDatabase db = FirebaseDatabase.getInstance();
         users = db.getReference("Users");
-
     }
 
     @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.btnSubmitSignIn:
-                // set message for sign in process
-                final ProgressDialog dialog = new ProgressDialog(SignIn.this);
-                dialog.setMessage("Sign in...");
-                dialog.show();
+    public void onClick(View v)
+    {
+        if (v.getId() == R.id.btnSubmitSignIn)
+        {
+            // set message for sign in process
+            final ProgressDialog dialog = new ProgressDialog(SignIn.this);
+            dialog.setMessage("Sign in...");
+            dialog.show();
 
                 users.addValueEventListener(new ValueEventListener() {
                     @Override
@@ -67,11 +67,17 @@ public class SignIn extends AppCompatActivity implements View.OnClickListener {
                                 Toast.makeText(SignIn.this, "Incorrect username/phone or password", Toast.LENGTH_SHORT).show();
                             }
                         }
-                        else {
-                            dialog.dismiss();
-                            Toast.makeText(SignIn.this, "User not exist", Toast.LENGTH_SHORT).show();
+                        else
+                        {
+                            Toast.makeText(SignIn.this, "Incorrect username/phone or password", Toast.LENGTH_SHORT).show();
                         }
                     }
+                    else
+                    {
+                        dialog.dismiss();
+                        Toast.makeText(SignIn.this, "User not exist", Toast.LENGTH_SHORT).show();
+                    }
+                }
 
                     @Override
                     public void onCancelled(@NonNull DatabaseError databaseError) {
