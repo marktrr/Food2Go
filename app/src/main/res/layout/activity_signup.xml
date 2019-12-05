@@ -24,7 +24,7 @@
             android:textSize="20sp" />
 
         <EditText
-            android:id="@+id/editPhone"
+            android:id="@+id/editNewPhone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/black"
@@ -62,7 +62,7 @@
             android:textSize="20sp" />
 
         <EditText
-            android:id="@+id/editPassword"
+            android:id="@+id/editNewPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/black"

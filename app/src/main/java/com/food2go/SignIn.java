@@ -67,20 +67,13 @@ public class SignIn extends AppCompatActivity implements View.OnClickListener {
                                 Toast.makeText(SignIn.this, "Incorrect username/phone or password", Toast.LENGTH_SHORT).show();
                             }
                         }
-                        else
-                        {
+                        else {
+                            dialog.dismiss();
                             Toast.makeText(SignIn.this, "Incorrect username/phone or password", Toast.LENGTH_SHORT).show();
                         }
                     }
-                    else
-                    {
-                        dialog.dismiss();
-                        Toast.makeText(SignIn.this, "User not exist", Toast.LENGTH_SHORT).show();
-                    }
-                }
-
                     @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
+                    public void onCancelled(DatabaseError databaseError) {
                     }
                 });
         }
