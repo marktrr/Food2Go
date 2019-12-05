@@ -6,8 +6,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.food2go.Model.Users;
@@ -16,6 +14,9 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+/**
+ * Created by Hy Minh Tran (Mark) on 12/03/2019
+ */
 
 public class SignUp extends AppCompatActivity  implements View.OnClickListener {
     EditText phoneNumber, ID, password;
