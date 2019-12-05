@@ -55,20 +55,22 @@ public class SignIn extends AppCompatActivity implements View.OnClickListener {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         // if user exist
-                        if(dataSnapshot.child(phoneNumber.getText().toString()).exists()) {
+                        if (dataSnapshot.child(phoneNumber.getText().toString()).exists()) {
                             dialog.dismiss();
                             // Get User Information
                             Users user = dataSnapshot.child(phoneNumber.getText().toString()).getValue(Users.class);
-                            if(user.getPassword().equals(password.getText().toString())) {
+                            if (user.getPassword().equals(password.getText().toString())) {
                                 Toast.makeText(SignIn.this, "Sign in successfully!", Toast.LENGTH_SHORT).show();
                                 Intent homeIntent = new Intent(SignIn.this, Home.class);
                                 Common.currentUser = user;
                                 startActivity(homeIntent);
                                 finish();
                             }
-                            else {
+                            else
+                            {
                                 Toast.makeText(SignIn.this, "Incorrect username/phone or password", Toast.LENGTH_SHORT).show();
                             }
+
                         }
                         else {
                             dialog.dismiss();

@@ -27,10 +27,10 @@ public class SignUp extends AppCompatActivity  implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
 
-        phoneNumber = (EditText) findViewById(R.id.editNewPhone);
-        ID = (EditText) findViewById(R.id.editNewID);
-        password = (EditText) findViewById(R.id.editNewPassword);
-        SignUp = (Button) findViewById(R.id.btnSubmitSignUp);
+        phoneNumber = findViewById(R.id.editPhone);
+        ID = findViewById(R.id.editNewID);
+        password = findViewById(R.id.editPassword);
+        SignUp = findViewById(R.id.btnSubmitSignUp);
 
         SignUp.setOnClickListener(this);
 
@@ -40,36 +40,32 @@ public class SignUp extends AppCompatActivity  implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.btnSubmitSignUp:
-                // set message for sign in process
-                final ProgressDialog dialog = new ProgressDialog(SignUp.this);
-                dialog.setMessage("Please wait...");
-                dialog.show();
+        if (v.getId() == R.id.btnSubmitSignUp) {// set message for sign in process
+            final ProgressDialog dialog = new ProgressDialog(SignUp.this);
+            dialog.setMessage("Please wait...");
+            dialog.show();
 
-                users.addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-                        // if ID or user already exist
-                        if(dataSnapshot.child(phoneNumber.getText().toString()).exists()) {
-                            dialog.dismiss();
-                            Toast.makeText(SignUp.this, "This phone already use for register!", Toast.LENGTH_SHORT).show();
-                        }
-                        else {
-                            dialog.dismiss();
-                            Users newUser = new Users(ID.getText().toString(), password.getText().toString());
-                            users.child(phoneNumber.getText().toString()).setValue(newUser);
-                            Toast.makeText(SignUp.this, "Sign up successfully!", Toast.LENGTH_SHORT).show();
-                            finish();
-                        }
+            users.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    // if ID or user already exist
+                    if (dataSnapshot.child(phoneNumber.getText().toString()).exists()) {
+                        dialog.dismiss();
+                        Toast.makeText(SignUp.this, "This phone number is already in use!", Toast.LENGTH_SHORT).show();
+                    } else {
+                        dialog.dismiss();
+                        Users newUser = new Users(ID.getText().toString(), password.getText().toString());
+                        users.child(phoneNumber.getText().toString()).setValue(newUser);
+                        Toast.makeText(SignUp.this, "Sign up successful!", Toast.LENGTH_SHORT).show();
+                        finish();
                     }
+                }
 
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
 
-                    }
-                });
-                break;
+                }
+            });
         }
     }
 }
