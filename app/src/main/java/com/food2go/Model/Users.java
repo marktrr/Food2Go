@@ -1,4 +1,7 @@
 package com.food2go.Model;
+/**
+ * Created by Hy Minh Tran (Mark) on 12/03/2019
+ */
 
 public class Users {
     private String id;

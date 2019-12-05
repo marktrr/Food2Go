@@ -6,6 +6,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+/**
+ * Created by Hy Minh Tran (Mark) on 12/03/2019
+ */
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 

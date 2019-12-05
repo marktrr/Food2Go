@@ -1,4 +1,7 @@
 package com.food2go;
+/**
+ * Created by Hy Minh Tran (Mark) on 12/04/2019
+ */
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -45,6 +48,7 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
     TextView txtViewName;
     RecyclerView.LayoutManager layout_manager;
     RecyclerView recycler_menu;
+    FirebaseRecyclerAdapter<Category, MenuViewHolder> adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -98,7 +102,7 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
                 new FirebaseRecyclerOptions.Builder<Category>()
                         .setQuery(category, Category.class)
                         .build();
-        FirebaseRecyclerAdapter<Category, MenuViewHolder> adapter = new FirebaseRecyclerAdapter<Category, MenuViewHolder>(options) {
+        adapter = new FirebaseRecyclerAdapter<Category, MenuViewHolder>(options) {
             @Override
             protected void onBindViewHolder(@NonNull MenuViewHolder holder, int position, @NonNull Category model) {
                 holder.txtMenuName.setText(model.getName());
@@ -107,7 +111,11 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
                 holder.setItemClickListener(new ItemClickListener() {
                     @Override
                     public void onClick(View view, int position, boolean isLongClick) {
-                        Toast.makeText(Home.this, ""+clickItem.getName(),Toast.LENGTH_SHORT).show();
+                        // onClick each item, send value to new activity
+                        Intent food= new Intent(Home.this, ListFood.class);
+                        // category id is key,we just get the key of this item
+                        food.putExtra("CategoryId", adapter.getRef(position).getKey());
+                        startActivity(food);
                     }
                 });
             }

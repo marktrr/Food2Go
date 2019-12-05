@@ -1,4 +1,7 @@
 package com.food2go;
+/**
+ * Created by Hy Minh Tran (Mark) on 12/03/2019
+ */
 
 import android.app.ProgressDialog;
 import android.content.Intent;
