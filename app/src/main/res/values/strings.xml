@@ -8,6 +8,9 @@
     <string name="aboutus">About Us</string>
     <string name="signup">Sign up</string>
     <string name="signin">Sign in</string>
+    <string name="title_activity_home">Home</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="password_label">Password:</string>
     <string name="name_label">Name:</string>
     <string name="phone_label">Phone Number:</string>
