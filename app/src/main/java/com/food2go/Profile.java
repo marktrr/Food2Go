@@ -6,6 +6,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -30,6 +34,8 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
     TextView lblPassword;
     TextView lblPhone;
 
+    //Database
+    DatabaseReference db = FirebaseDatabase.getInstance().getReference();
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,6 +69,16 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
         btnSave = findViewById(R.id.save);
         btnSave.setOnClickListener(this);
     }
+
+    private void SaveUser()
+    {
+        db.child("Users").child("profile").child("email").setValue(txtEmail.getText().toString());
+        db.child("Users").child("profile").child("first name").setValue(txtFirstName.getText().toString());
+        db.child("Users").child("profile").child("last name").setValue(txtLastName.getText().toString());
+        db.child("Users").child("profile").child("phone").setValue(Integer.parseInt(txtPhone.getText().toString()));
+        db.child("Users").child("profile").child("password").setValue(txtPassword.getText().toString());
+    }
+
     @Override
     public void onClick(View v) {
         switch (v.getId())
@@ -82,6 +98,8 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
                 txtEmail.setEnabled(false);
                 txtPhone.setEnabled(false);
                 txtPassword.setEnabled(false);
+                SaveUser();
+                Toast.makeText(Profile.this, "Saved!", Toast.LENGTH_SHORT).show();
             }
         }
     }
