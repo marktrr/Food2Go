@@ -82,7 +82,7 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
 
         // Set current user name
         View headerView = navigationView.getHeaderView(0);
-        txtViewName = (TextView) headerView.findViewById(R.id.txtViewName);
+        txtViewName = headerView.findViewById(R.id.txtViewName);
         txtViewName.setText(Common.currentUser.getId());
 
         // Load menu
@@ -157,6 +157,10 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
         else if (id == R.id.nav_order_history) {
 
 
+        }
+        else if (id == R.id.nav_profile) {
+            Intent profileIntent = new Intent(getApplicationContext(), Profile.class);
+            startActivity(profileIntent);
         }
         else if (id == R.id.nav_log_out) {
 
