@@ -18,12 +18,12 @@
           android:id="@+id/btnSignUp"
           style="@style/btnSignUp"
           android:layout_width="wrap_content"
-          android:fontFamily="@font/ubuntu"></Button>
+          android:fontFamily="@font/ubuntu" />
 
       <Button
           android:id="@+id/btnSignIn"
           style="@style/btnSignIn"
           android:layout_width="wrap_content"
-          android:fontFamily="@font/ubuntu"></Button>
+          android:fontFamily="@font/ubuntu" />
     </LinearLayout>
 </RelativeLayout>

@@ -21,8 +21,10 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.Objects;
+
 public class SignIn extends AppCompatActivity implements View.OnClickListener {
-    EditText phoneNumber, password;
+    EditText email, password;
     Button btnSignIn;
     DatabaseReference users;
 
@@ -30,7 +32,7 @@ public class SignIn extends AppCompatActivity implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signin);
 
-        phoneNumber = findViewById(R.id.editPhone);
+        email = findViewById(R.id.editEmail);
         password = findViewById(R.id.editPassword);
         btnSignIn = findViewById(R.id.btnSubmitSignIn);
 
@@ -55,13 +57,13 @@ public class SignIn extends AppCompatActivity implements View.OnClickListener {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         // if user exist
-                        if (dataSnapshot.child(phoneNumber.getText().toString()).exists()) {
+                        if (dataSnapshot.child(email.getText().toString()).exists()) {
                             dialog.dismiss();
                             // Get User Information
-                            Users user = dataSnapshot.child(phoneNumber.getText().toString()).getValue(Users.class);
-                            user.setPhoneNumber(phoneNumber.getText().toString());
-                            if (user.getPassword().equals(password.getText().toString())) {
-                                Toast.makeText(SignIn.this, "Sign in successfully!", Toast.LENGTH_SHORT).show();
+
+                            Users user = dataSnapshot.child(email.getText().toString()).getValue(Users.class);
+                            if (Objects.requireNonNull(user).getPassword().equals(password.getText().toString())) {
+                                Toast.makeText(SignIn.this, "Sign in successful!", Toast.LENGTH_SHORT).show();
                                 Intent homeIntent = new Intent(SignIn.this, Home.class);
                                 Common.currentUser = user;
                                 startActivity(homeIntent);
@@ -69,13 +71,13 @@ public class SignIn extends AppCompatActivity implements View.OnClickListener {
                             }
                             else
                             {
-                                Toast.makeText(SignIn.this, "Incorrect username/phone or password", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(SignIn.this, "Incorrect email or password", Toast.LENGTH_SHORT).show();
                             }
 
                         }
                         else {
                             dialog.dismiss();
-                            Toast.makeText(SignIn.this, "Incorrect username/phone or password", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(SignIn.this, "Incorrect email or password", Toast.LENGTH_SHORT).show();
                         }
                     }
                     @Override

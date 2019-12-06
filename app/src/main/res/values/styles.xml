@@ -12,7 +12,7 @@
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_weight">1</item>
-        <item name="android:text">@string/signup</item>
+        <item name="android:text">@string/sign_up</item>
         <item name="android:textColor">@color/white</item>
         <item name="android:textSize">20dp</item>
         <item name="android:background">@color/blue</item>
@@ -24,7 +24,7 @@
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_weight">1</item>
-        <item name="android:text">@string/signin</item>
+        <item name="android:text">@string/sign_in</item>
         <item name="android:textColor">@color/white</item>
         <item name="android:textSize">20dp</item>
         <item name="android:background">@color/green</item>
@@ -35,7 +35,7 @@
     <style name="btnSubmitSignUp">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:text">@string/signup</item>
+        <item name="android:text">@string/sign_up</item>
         <item name="android:layout_alignParentBottom">true</item>
         <item name="android:textColor">@color/white</item>
         <item name="android:textSize">20dp</item>
@@ -47,7 +47,7 @@
     <style name="btnSubmitSignIn">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:text">@string/signin</item>
+        <item name="android:text">@string/sign_in</item>
         <item name="android:layout_alignParentBottom">true</item>
         <item name="android:textColor">@color/white</item>
         <item name="android:textSize">20dp</item>
