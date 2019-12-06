@@ -31,14 +31,14 @@ import java.util.Locale;
 class CartViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
     public TextView item_name, item_price;
-    public ImageView img_cart_count;
+    public ImageView quantity;
 
 
     public CartViewHolder(View itemView) {
         super(itemView);
         item_name = itemView.findViewById(R.id.cart_item_name);
         item_price = itemView.findViewById(R.id.cart_item_price);
-        img_cart_count = itemView.findViewById(R.id.cart_item_count);
+        quantity = itemView.findViewById(R.id.cart_item_count);
     }
 
     @Override
@@ -67,12 +67,10 @@ public class CartAdapter extends RecyclerView.Adapter<CartViewHolder> {
     @Override
     public void onBindViewHolder(CartViewHolder holder, int position) {
         TextDrawable drawable = TextDrawable.builder().beginConfig().fontSize(40).bold().endConfig().buildRound("" + listData.get(position).getQuantity(), Color.RED);
-        holder.img_cart_count.setImageDrawable(drawable);
+        holder.quantity.setImageDrawable(drawable);
 
-        Locale locale = new Locale("en", "US");
-        NumberFormat fmt = NumberFormat.getCurrencyInstance(locale);
         double price = listData.get(position).getPrice() * listData.get(position).getQuantity();
-        holder.item_price.setText(fmt.format(price));
+        holder.item_price.setText(String.valueOf(price));
         holder.item_name.setText(listData.get(position).getProductName());
     }
 

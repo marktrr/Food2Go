@@ -1,4 +1,7 @@
 package com.food2go;
+/**
+ * Created by Hy Minh Tran (Mark) on 12/05/2019
+ */
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -34,7 +37,6 @@ public class FoodDetail extends AppCompatActivity implements View.OnClickListene
     DatabaseReference item;
     String foodId = "";
     Food currentItem;
-    OrderDB orderDB;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

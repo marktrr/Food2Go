@@ -14,4 +14,7 @@
     <string name="password_label">Password:</string>
     <string name="name_label">Name:</string>
     <string name="phone_label">Phone Number:</string>
+    <string name="shipping_address">Shipping Address:</string>
+    <string name="province">Province:</string>
+    <string name="postalCode">Postal Code:</string>
 </resources>
