@@ -60,6 +60,7 @@ public class SignIn extends AppCompatActivity implements View.OnClickListener {
                         if (dataSnapshot.child(email.getText().toString()).exists()) {
                             dialog.dismiss();
                             // Get User Information
+
                             Users user = dataSnapshot.child(email.getText().toString()).getValue(Users.class);
                             if (Objects.requireNonNull(user).getPassword().equals(password.getText().toString())) {
                                 Toast.makeText(SignIn.this, "Sign in successful!", Toast.LENGTH_SHORT).show();

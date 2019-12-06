@@ -9,4 +9,6 @@
     <color name="black">#000000</color>
     <color name="overlayBackground">#7f333639</color>
     <color name="overlayActiomBar">#0e0d0e</color>
+    <color name="red">#F32A12</color>
+    <color name="placeorder">#05FE57</color>
 </resources>

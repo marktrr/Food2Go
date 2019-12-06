@@ -55,6 +55,7 @@
             android:textColorHint="@color/white"
             android:fontFamily="@font/ubuntu"
             android:textSize="20sp" />
+
     </LinearLayout>
 
     <Button
