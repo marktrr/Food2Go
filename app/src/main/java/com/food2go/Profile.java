@@ -83,6 +83,10 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId())
         {
+            case R.id.avatar:
+            {
+
+            }
             case R.id.editProfile:
             {
                 txtFirstName.setEnabled(true);
