@@ -36,10 +36,8 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.view.Menu;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class Home extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -85,7 +83,7 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
 
         // Set current user name
         View headerView = navigationView.getHeaderView(0);
-        txtViewName = (TextView) headerView.findViewById(R.id.txtViewName);
+        txtViewName = headerView.findViewById(R.id.txtViewName);
         txtViewName.setText(Common.currentUser.getId());
 
         // Load menu
@@ -151,11 +149,15 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
         if (id == R.id.nav_menu) {
             startActivity(new Intent(Home.this, Home.class));
         }
-        else if (id == R.id.nav_cart) {
-            startActivity(new Intent(Home.this, Cart.class));
+        else if (id == R.id.nav_current_orders) {
+         startActivity(new Intent(Home.this, Cart.class));
         }
-        else if (id == R.id.nav_orders) {
+        else if (id == R.id.nav_order_history) {
 
+        }
+        else if (id == R.id.nav_profile) {
+            Intent profileIntent = new Intent(getApplicationContext(), Profile.class);
+            startActivity(profileIntent);
         }
         else if (id == R.id.nav_log_out) {
 

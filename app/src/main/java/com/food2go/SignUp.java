@@ -19,7 +19,7 @@ import com.google.firebase.database.ValueEventListener;
  */
 
 public class SignUp extends AppCompatActivity  implements View.OnClickListener {
-    EditText phoneNumber, ID, password;
+    EditText phoneNumber, email, ID, password;
     Button SignUp;
     DatabaseReference users;
 
@@ -28,6 +28,7 @@ public class SignUp extends AppCompatActivity  implements View.OnClickListener {
         setContentView(R.layout.activity_signup);
 
         phoneNumber = findViewById(R.id.editPhone);
+        email = findViewById(R.id.editEmail);
         ID = findViewById(R.id.editNewID);
         password = findViewById(R.id.editPassword);
         SignUp = findViewById(R.id.btnSubmitSignUp);
@@ -52,10 +53,17 @@ public class SignUp extends AppCompatActivity  implements View.OnClickListener {
                     if (dataSnapshot.child(phoneNumber.getText().toString()).exists()) {
                         dialog.dismiss();
                         Toast.makeText(SignUp.this, "This phone number is already in use!", Toast.LENGTH_SHORT).show();
-                    } else {
+                    }
+                    else if (dataSnapshot.child(email.getText().toString()).exists())
+                    {
+                        dialog.dismiss();
+                        Toast.makeText(SignUp.this, "This email is already in use!", Toast.LENGTH_SHORT).show();
+                    }
+                    else {
                         dialog.dismiss();
                         Users newUser = new Users(ID.getText().toString(), password.getText().toString(), phoneNumber.getText().toString());
                         users.child(phoneNumber.getText().toString()).setValue(newUser);
+                        users.child(email.getText().toString()).setValue(newUser);
                         Toast.makeText(SignUp.this, "Sign up successful!", Toast.LENGTH_SHORT).show();
                         finish();
                     }

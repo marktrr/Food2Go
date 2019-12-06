@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Food2Go</string>
     <string name="homepage">Home</string>
@@ -13,9 +14,6 @@
     <string name="password_label">Password:</string>
     <string name="name_label">Name:</string>
     <string name="phone_label">Phone Number:</string>
-    <string name="shipping_address">Shipping Address:</string>
-    <string name="province">Province:</string>
-    <string name="postalCode">Postal Code:</string>
     <string name="log_out">Log out</string>
     <string name="about_us">About us</string>
     <string name="order_history">Order History</string>

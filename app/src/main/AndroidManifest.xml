@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.food2go">
 
     <application
@@ -12,6 +13,7 @@
         <activity android:name=".Address"></activity>
         <activity android:name=".Cart" />
         <activity android:name=".FoodDetail" />
+
         <activity android:name=".ListFood" />
         <activity
             android:name=".Home"
@@ -29,6 +31,9 @@
             android:parentActivityName=".MainActivity" />
         <activity
             android:name=".SignUp"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".Profile"
             android:parentActivityName=".MainActivity" />
 
         <meta-data
