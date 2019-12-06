@@ -54,7 +54,7 @@ public class SignUp extends AppCompatActivity  implements View.OnClickListener {
                         Toast.makeText(SignUp.this, "This phone number is already in use!", Toast.LENGTH_SHORT).show();
                     } else {
                         dialog.dismiss();
-                        Users newUser = new Users(ID.getText().toString(), password.getText().toString());
+                        Users newUser = new Users(ID.getText().toString(), password.getText().toString(), phoneNumber.getText().toString());
                         users.child(phoneNumber.getText().toString()).setValue(newUser);
                         Toast.makeText(SignUp.this, "Sign up successful!", Toast.LENGTH_SHORT).show();
                         finish();

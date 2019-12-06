@@ -68,8 +68,9 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                /*Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();*/
+                // add to cart
+                Intent cartIntent = new Intent(Home.this, Cart.class);
+                startActivity(cartIntent);
             }
         });
 
@@ -148,16 +149,12 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
         int id = item.getItemId();
 
         if (id == R.id.nav_menu) {
-            Intent menuIntent = new Intent(Home.this, Home.class);
-            startActivity(menuIntent);
-
+            startActivity(new Intent(Home.this, Home.class));
         }
         else if (id == R.id.nav_cart) {
-
-
+            startActivity(new Intent(Home.this, Cart.class));
         }
         else if (id == R.id.nav_orders) {
-
 
         }
         else if (id == R.id.nav_log_out) {

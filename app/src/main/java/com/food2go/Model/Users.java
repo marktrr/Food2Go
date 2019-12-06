@@ -6,14 +6,16 @@ package com.food2go.Model;
 public class Users {
     private String id;
     private String password;
+    private String phoneNumber;
 
     public Users() {
 
     }
 
-    public Users(String id, String password) {
+    public Users(String id, String password, String phoneNumber) {
         this.id = id;
         this.password = password;
+        this.phoneNumber = phoneNumber;
     }
 
     public void setId(String id) {
@@ -30,5 +32,13 @@ public class Users {
 
     public String getPassword() {
         return password;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 }

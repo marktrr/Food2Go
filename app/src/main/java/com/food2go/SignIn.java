@@ -59,6 +59,7 @@ public class SignIn extends AppCompatActivity implements View.OnClickListener {
                             dialog.dismiss();
                             // Get User Information
                             Users user = dataSnapshot.child(phoneNumber.getText().toString()).getValue(Users.class);
+                            user.setPhoneNumber(phoneNumber.getText().toString());
                             if (user.getPassword().equals(password.getText().toString())) {
                                 Toast.makeText(SignIn.this, "Sign in successfully!", Toast.LENGTH_SHORT).show();
                                 Intent homeIntent = new Intent(SignIn.this, Home.class);

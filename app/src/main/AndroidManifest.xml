@@ -9,7 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ListFood"></activity>
+        <activity android:name=".Cart"></activity>
+        <activity android:name=".FoodDetail" />
+        <activity android:name=".ListFood" />
         <activity
             android:name=".Home"
             android:label="@string/title_activity_home"
@@ -26,7 +28,7 @@
             android:parentActivityName=".MainActivity" />
         <activity
             android:name=".SignUp"
-            android:parentActivityName=".MainActivity"></activity>
+            android:parentActivityName=".MainActivity" />
 
         <meta-data
             android:name="preloaded_fonts"
