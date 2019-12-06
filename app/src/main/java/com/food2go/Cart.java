@@ -1,20 +1,21 @@
 package com.food2go;
+/**
+ * Created by Hy Minh Tran (Mark) on 12/05/2019
+ */
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import android.icu.text.NumberFormat;
 import com.food2go.DB.OrderDB;
 import com.food2go.Model.Order;
 
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-
 import com.food2go.ViewHolder.CartAdapter;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -25,16 +26,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-public class Cart extends AppCompatActivity {
+public class Cart extends AppCompatActivity implements View.OnClickListener {
 
     RecyclerView recyclerView;
     RecyclerView.LayoutManager layoutManager;
     FirebaseDatabase db;
-    DatabaseReference cart;
-    TextView txtTotalPrice;
-    Button btnPlace;
-    OrderDB orderDB;
-    List<Order> order = new ArrayList<>();
+    DatabaseReference order;
+    TextView totalPrice;
+    Button btnNext;
+    List<Order> cart = new ArrayList<>();
     CartAdapter adapter;
 
     @RequiresApi(api = Build.VERSION_CODES.N)
@@ -45,7 +45,7 @@ public class Cart extends AppCompatActivity {
 
         // Firebase
         db = FirebaseDatabase.getInstance();
-        cart = db.getReference("Cart");
+        order = db.getReference("Orders");
 
         //Init
         recyclerView = findViewById(R.id.listCart);
@@ -53,26 +53,32 @@ public class Cart extends AppCompatActivity {
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
 
-        txtTotalPrice = (TextView)findViewById(R.id.total);
-        btnPlace = findViewById(R.id.btnPlaceOrder);
-        orderDB = new OrderDB(this);
+        totalPrice = (TextView)findViewById(R.id.total);
+        btnNext = findViewById(R.id.btnNext);
+        btnNext.setOnClickListener(this);
         loadListFood();
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.N)
     private void loadListFood() {
-        order = new OrderDB(this).getCart();
-        adapter = new CartAdapter(order, this);
+        cart = new OrderDB(this).getCart();
+        adapter = new CartAdapter(cart, this);
         adapter.notifyDataSetChanged();
         recyclerView.setAdapter(adapter);
 
         //calculating total price
         double total = 0;
-        for (Order item : order)
+        for (Order item : cart)
             total += item.getPrice() * item.getQuantity();
-        Locale locale = new Locale("en", "US");
-        NumberFormat fmt = NumberFormat.getCurrencyInstance(locale);
 
-        txtTotalPrice.setText(fmt.format(total));
+        totalPrice.setText("$" + String.valueOf(total));
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.btnNext:
+                startActivity(new Intent(Cart.this, Address.class));
+                break;
+        }
     }
 }
