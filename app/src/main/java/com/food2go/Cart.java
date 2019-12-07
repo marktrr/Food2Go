@@ -53,7 +53,7 @@ public class Cart extends AppCompatActivity implements View.OnClickListener {
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
 
-        totalPrice = (TextView)findViewById(R.id.total);
+        totalPrice = findViewById(R.id.total);
         btnNext = findViewById(R.id.btnNext);
         btnNext.setOnClickListener(this);
         loadListFood();
@@ -70,15 +70,13 @@ public class Cart extends AppCompatActivity implements View.OnClickListener {
         for (Order item : cart)
             total += item.getPrice() * item.getQuantity();
 
-        totalPrice.setText("$" + String.valueOf(total));
+        totalPrice.setText("$" + total);
     }
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.btnNext:
-                startActivity(new Intent(Cart.this, Address.class));
-                break;
+        if (v.getId() == R.id.btnNext) {
+            startActivity(new Intent(Cart.this, Address.class));
         }
     }
 }
