@@ -150,17 +150,19 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
             startActivity(new Intent(Home.this, Home.class));
         }
         else if (id == R.id.nav_current_orders) {
-         startActivity(new Intent(Home.this, Cart.class));
+            startActivity(new Intent(Home.this, Cart.class));
         }
         else if (id == R.id.nav_order_history) {
-
+            startActivity(new Intent(Home.this, OrderHistory.class));
         }
         else if (id == R.id.nav_profile) {
             Intent profileIntent = new Intent(getApplicationContext(), Profile.class);
             startActivity(profileIntent);
         }
         else if (id == R.id.nav_log_out) {
-
+            Intent mainPage = new Intent(Home.this, MainActivity.class);
+            mainPage.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(mainPage);
         }
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

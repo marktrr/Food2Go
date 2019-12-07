@@ -72,9 +72,9 @@ public class Profile extends AppCompatActivity implements View.OnClickListener
         //Text Fields
         txtFirstName = findViewById(R.id.editFirstName);
         txtLastName = findViewById(R.id.editLastName);
-        txtEmail = findViewById(R.id.editEmail);
-        txtPhone = findViewById(R.id.editPhone);
-        txtPassword = findViewById(R.id.editPassword);
+        txtEmail = findViewById(R.id.updateEmail);
+        txtPhone = findViewById(R.id.updatePhone);
+        txtPassword = findViewById(R.id.updatePassword);
 
         txtFirstName.setEnabled(false);
         txtLastName.setEnabled(false);

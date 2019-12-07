@@ -109,7 +109,7 @@
             tools:layout_conversion_absoluteWidth="411dp" />
 
         <EditText
-            android:id="@+id/editEmail"
+            android:id="@+id/updateEmail"
             android:layout_width="410sp"
             android:layout_height="wrap_content"
             android:fontFamily="@font/ubuntu"
@@ -133,12 +133,12 @@
             app:layout_constraintBottom_toTopOf="@+id/editPhone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editEmail"
+            app:layout_constraintTop_toBottomOf="@+id/updateEmail"
             tools:layout_conversion_absoluteHeight="26dp"
             tools:layout_conversion_absoluteWidth="54dp" />
 
         <EditText
-            android:id="@+id/editPhone"
+            android:id="@+id/updatePhone"
             android:layout_width="410sp"
             android:layout_height="wrap_content"
             android:fontFamily="@font/ubuntu"
@@ -168,7 +168,7 @@
             tools:layout_conversion_absoluteWidth="93dp" />
 
         <EditText
-            android:id="@+id/editPassword"
+            android:id="@+id/updatePassword"
             android:layout_width="410sp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="24dp"
