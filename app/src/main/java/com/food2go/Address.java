@@ -60,6 +60,7 @@ public class Address extends AppCompatActivity implements Spinner.OnItemSelected
         province.setAdapter(adapter);
 
         province.setOnItemSelectedListener(this);
+        btnPlaceOrder.setOnClickListener(this);
 
         if (getIntent() != null) {
             totalPrice = getIntent().getStringExtra("totalPrice");
@@ -92,11 +93,11 @@ public class Address extends AppCompatActivity implements Spinner.OnItemSelected
     }
 
     public void showDialog() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Place Order");
-        builder.setMessage("Are you sure to place order?");
+        AlertDialog.Builder dialog = new AlertDialog.Builder(Address.this);
+        dialog.setTitle("Place Order");
+        dialog.setMessage("Are you sure to place order?");
 
-        builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+        dialog.setPositiveButton("YES", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 // add order to firebase
@@ -115,16 +116,16 @@ public class Address extends AppCompatActivity implements Spinner.OnItemSelected
                 new OrderDB(getBaseContext()).clearCart();
                 Toast.makeText(Address.this, "Order place successfully.", Toast.LENGTH_SHORT).show();
                 finish();
+                startActivity(getIntent());
             }
         });
 
-        builder.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
+        dialog.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 dialogInterface.dismiss();
             }
         });
-        AlertDialog dialog = builder.create();
         dialog.show();
     }
 }
