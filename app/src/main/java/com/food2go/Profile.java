@@ -30,10 +30,12 @@ import androidx.core.content.FileProvider;
 
 public class Profile extends AppCompatActivity implements View.OnClickListener
 {
+    //Image Picker
     private String cameraFilePath;
-    ImageSwitcher imageView;
     private static final byte GALLERY_REQUEST_CODE = 100;
     private static final byte CAMERA_REQUEST_CODE = 101;
+
+
     //Buttons
     ImageButton btnAvatar;
     Button btnEditProfile;
@@ -138,7 +140,7 @@ public class Profile extends AppCompatActivity implements View.OnClickListener
             }
             else if (requestCode == CAMERA_REQUEST_CODE)
             {
-                imageView.setImageURI(Uri.parse(cameraFilePath));
+                btnAvatar.setImageURI(Uri.parse(cameraFilePath));
             }
         }
     }
