@@ -13,6 +13,7 @@ import com.food2go.Model.Order;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -77,7 +78,12 @@ public class Cart extends AppCompatActivity implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btnNext:
-                startActivity(new Intent(Cart.this, Address.class));
+                Intent address = new Intent(Cart.this, Address.class);
+                address.putExtra("totalPrice", totalPrice.getText().toString()); // get price
+                Bundle bundle = new Bundle();
+                bundle.putParcelable("listFoods", (Parcelable) cart); // get listfoods
+                address.putExtras(bundle);
+                startActivity(address);
                 break;
         }
     }
