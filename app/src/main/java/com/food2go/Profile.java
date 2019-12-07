@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageSwitcher;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,11 +26,14 @@ import java.util.Date;
 import java.util.Objects;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.FileProvider;
 
 public class Profile extends AppCompatActivity implements View.OnClickListener
 {
     private String cameraFilePath;
+    ImageSwitcher imageView;
     private static final byte GALLERY_REQUEST_CODE = 100;
+    private static final byte CAMERA_REQUEST_CODE = 101;
     //Buttons
     ImageButton btnAvatar;
     Button btnEditProfile;
@@ -93,6 +97,7 @@ public class Profile extends AppCompatActivity implements View.OnClickListener
         db.child("Users").child("profile").child("phone").setValue(Integer.parseInt(txtPhone.getText().toString()));
         db.child("Users").child("profile").child("password").setValue(txtPassword.getText().toString());
     }
+    //Gallery
     private void PickFromGallery()
     {
         //Create an Intent with action as ACTION_PICK
@@ -131,6 +136,23 @@ public class Profile extends AppCompatActivity implements View.OnClickListener
                 // Set the Image in ImageView after decoding the String
                 btnAvatar.setImageBitmap(BitmapFactory.decodeFile(imgDecodableString));
             }
+            else if (requestCode == CAMERA_REQUEST_CODE)
+            {
+                imageView.setImageURI(Uri.parse(cameraFilePath));
+            }
+        }
+    }
+    //Camera
+    private void CaptureFromCamera() {
+        try
+        {
+            Intent camera_intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+            camera_intent.putExtra(MediaStore.EXTRA_OUTPUT, FileProvider.getUriForFile(this, BuildConfig.APPLICATION_ID + ".provider", createImageFile()));
+            startActivityForResult(camera_intent, CAMERA_REQUEST_CODE);
+        }
+        catch (IOException ex)
+        {
+            ex.printStackTrace();
         }
     }
 
