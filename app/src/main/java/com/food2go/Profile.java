@@ -1,6 +1,13 @@
 package com.food2go;
 
+import android.app.Activity;
+import android.content.Intent;
+import android.database.Cursor;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.MediaStore;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -11,10 +18,18 @@ import android.widget.Toast;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Objects;
+
 import androidx.appcompat.app.AppCompatActivity;
 
-public class Profile extends AppCompatActivity implements View.OnClickListener {
-
+public class Profile extends AppCompatActivity implements View.OnClickListener
+{
+    private String cameraFilePath;
+    private static final byte GALLERY_REQUEST_CODE = 100;
     //Buttons
     ImageButton btnAvatar;
     Button btnEditProfile;
@@ -78,14 +93,70 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
         db.child("Users").child("profile").child("phone").setValue(Integer.parseInt(txtPhone.getText().toString()));
         db.child("Users").child("profile").child("password").setValue(txtPassword.getText().toString());
     }
+    private void PickFromGallery()
+    {
+        //Create an Intent with action as ACTION_PICK
+        Intent gallery_intent=new Intent(Intent.ACTION_PICK);
+        // Sets the type as image/*. This ensures only components of type image are selected
+        gallery_intent.setType("image/*");
+        //We pass an extra array with the accepted mime types. This will ensure only components with these MIME types as targeted.
+        String[] mimeTypes = {"image/jpeg", "image/png"};
+        gallery_intent.putExtra(Intent.EXTRA_MIME_TYPES,mimeTypes);
+        // Launching the Intent
+        startActivityForResult(gallery_intent,GALLERY_REQUEST_CODE);
+    }
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data)
+    {
+        super.onActivityResult(requestCode, resultCode, data);
+        // Result code is RESULT_OK only if the user selects an Image
+        if (resultCode == Activity.RESULT_OK)
+        {
+            if (requestCode == GALLERY_REQUEST_CODE)
+            {
+                //data.getData returns the content URI for the selected Image
+                Uri selectedImage = data.getData();
+                btnAvatar.setImageURI(selectedImage);
+                String[] filePathColumn = {MediaStore.Images.Media.DATA};
+                // Get the cursor
+                Cursor cursor = getContentResolver().query(Objects.requireNonNull(selectedImage), filePathColumn, null, null, null);
+                // Move to first row
+                Objects.requireNonNull(cursor).moveToFirst();
+                //Get the column index of MediaStore.Images.Media.DATA
+                int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+                //Gets the String value in the column
+                String imgDecodableString = cursor.getString(columnIndex);
 
+                cursor.close();
+                // Set the Image in ImageView after decoding the String
+                btnAvatar.setImageBitmap(BitmapFactory.decodeFile(imgDecodableString));
+            }
+        }
+    }
+
+    private File createImageFile() throws IOException
+    {
+        // Create an image file name
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+        String imageFileName = "JPEG_" + timeStamp + "_";
+        //This is the directory in which the file will be created. This is the default location of Camera photos
+        File storageDir = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM), "Camera");
+        File image = File.createTempFile(
+                imageFileName,  /* prefix */
+                ".jpg",         /* suffix */
+                storageDir      /* directory */
+        );
+        // Save a file: path for using again
+        cameraFilePath = "file://" + image.getAbsolutePath();
+        return image;
+    }
     @Override
     public void onClick(View v) {
         switch (v.getId())
         {
             case R.id.avatar:
             {
-
+                PickFromGallery();
             }
             case R.id.editProfile:
             {
