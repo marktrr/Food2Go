@@ -23,6 +23,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import org.w3c.dom.Text;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -35,7 +36,7 @@ public class Cart extends AppCompatActivity implements View.OnClickListener {
     DatabaseReference order;
     TextView totalPrice;
     Button btnNext;
-    List<Order> cart = new ArrayList<>();
+    List<Order> cart = new ArrayList<Order>();
     CartAdapter adapter;
 
     @RequiresApi(api = Build.VERSION_CODES.N)
@@ -80,9 +81,9 @@ public class Cart extends AppCompatActivity implements View.OnClickListener {
             case R.id.btnNext:
                 Intent address = new Intent(Cart.this, Address.class);
                 address.putExtra("totalPrice", totalPrice.getText().toString()); // get price
-                Bundle bundle = new Bundle();
-                bundle.putParcelable("listFoods", (Parcelable) cart); // get listfoods
-                address.putExtras(bundle);
+                Bundle args = new Bundle();
+                args.putSerializable("arrayList",(Serializable)cart);
+                address.putExtra("listFoods",args);
                 startActivity(address);
                 break;
         }

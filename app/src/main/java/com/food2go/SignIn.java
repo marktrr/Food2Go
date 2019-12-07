@@ -24,7 +24,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.Objects;
 
 public class SignIn extends AppCompatActivity implements View.OnClickListener {
-    EditText email, password;
+    EditText phoneNumber, password;
     Button btnSignIn;
     DatabaseReference users;
 
@@ -32,7 +32,7 @@ public class SignIn extends AppCompatActivity implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signin);
 
-        email = findViewById(R.id.editEmail);
+        phoneNumber = findViewById(R.id.editPhone);
         password = findViewById(R.id.editPassword);
         btnSignIn = findViewById(R.id.btnSubmitSignIn);
 
@@ -57,12 +57,13 @@ public class SignIn extends AppCompatActivity implements View.OnClickListener {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         // if user exist
-                        if (dataSnapshot.child(email.getText().toString()).exists()) {
+                        if (dataSnapshot.child(phoneNumber.getText().toString()).exists()) {
                             dialog.dismiss();
                             // Get User Information
 
-                            Users user = dataSnapshot.child(email.getText().toString()).getValue(Users.class);
-                            if (Objects.requireNonNull(user).getPassword().equals(password.getText().toString())) {
+                            Users user = dataSnapshot.child(phoneNumber.getText().toString()).getValue(Users.class);
+                            user.setPhoneNumber(phoneNumber.getText().toString()); //set the phone of user
+                            if (user.getPassword().equals(password.getText().toString())) {
                                 Toast.makeText(SignIn.this, "Sign in successful!", Toast.LENGTH_SHORT).show();
                                 Intent homeIntent = new Intent(SignIn.this, Home.class);
                                 Common.currentUser = user;
@@ -77,7 +78,7 @@ public class SignIn extends AppCompatActivity implements View.OnClickListener {
                         }
                         else {
                             dialog.dismiss();
-                            Toast.makeText(SignIn.this, "Incorrect email or password", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(SignIn.this, "User not exist", Toast.LENGTH_SHORT).show();
                         }
                     }
                     @Override

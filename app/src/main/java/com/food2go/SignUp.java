@@ -19,7 +19,7 @@ import com.google.firebase.database.ValueEventListener;
  */
 
 public class SignUp extends AppCompatActivity  implements View.OnClickListener {
-    EditText phoneNumber, email, ID, password;
+    EditText phoneNumber, ID, password;
     Button SignUp;
     DatabaseReference users;
 
@@ -27,10 +27,9 @@ public class SignUp extends AppCompatActivity  implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
 
-        phoneNumber = findViewById(R.id.editPhone);
-        email = findViewById(R.id.editEmail);
+        phoneNumber = findViewById(R.id.editNewPhone);
         ID = findViewById(R.id.editNewID);
-        password = findViewById(R.id.editPassword);
+        password = findViewById(R.id.editNewPassword);
         SignUp = findViewById(R.id.btnSubmitSignUp);
 
         SignUp.setOnClickListener(this);
@@ -41,7 +40,8 @@ public class SignUp extends AppCompatActivity  implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        if (v.getId() == R.id.btnSubmitSignUp) {// set message for sign in process
+        if (v.getId() == R.id.btnSubmitSignUp) {
+            // set message for sign in process
             final ProgressDialog dialog = new ProgressDialog(SignUp.this);
             dialog.setMessage("Please wait...");
             dialog.show();
@@ -54,16 +54,10 @@ public class SignUp extends AppCompatActivity  implements View.OnClickListener {
                         dialog.dismiss();
                         Toast.makeText(SignUp.this, "This phone number is already in use!", Toast.LENGTH_SHORT).show();
                     }
-                    else if (dataSnapshot.child(email.getText().toString()).exists())
-                    {
-                        dialog.dismiss();
-                        Toast.makeText(SignUp.this, "This email is already in use!", Toast.LENGTH_SHORT).show();
-                    }
                     else {
                         dialog.dismiss();
                         Users newUser = new Users(ID.getText().toString(), password.getText().toString(), phoneNumber.getText().toString());
                         users.child(phoneNumber.getText().toString()).setValue(newUser);
-                        users.child(email.getText().toString()).setValue(newUser);
                         Toast.makeText(SignUp.this, "Sign up successful!", Toast.LENGTH_SHORT).show();
                         finish();
                     }

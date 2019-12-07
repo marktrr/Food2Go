@@ -38,6 +38,7 @@ public class Address extends AppCompatActivity implements Spinner.OnItemSelected
     String totalPrice;
     FirebaseDatabase db;
     DatabaseReference report;
+    List<Order> cart = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +63,8 @@ public class Address extends AppCompatActivity implements Spinner.OnItemSelected
 
         if (getIntent() != null) {
             totalPrice = getIntent().getStringExtra("totalPrice");
+            Bundle args = getIntent().getBundleExtra("listFoods");
+            cart = (List<Order>) args.getSerializable("arrayList");
         }
     }
 
@@ -89,16 +92,13 @@ public class Address extends AppCompatActivity implements Spinner.OnItemSelected
     }
 
     public void showDialog() {
-        AlertDialog.Builder dialog = new AlertDialog.Builder(this);
-        dialog.setTitle("Place Order");
-        dialog.setMessage("Are you sure to place order?");
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Place Order");
+        builder.setMessage("Are you sure to place order?");
 
-        dialog.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+        builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                List<Order> cart = new ArrayList<>();
-                Bundle bundle = getIntent().getExtras();
-                cart = bundle.getParcelable("data");
                 // add order to firebase
                 String fullAddress = address.getText().toString() + ", " + provinceStr + ", CA, " + postalCode.getText().toString();
                 Reports newOrder = new Reports(
@@ -118,12 +118,13 @@ public class Address extends AppCompatActivity implements Spinner.OnItemSelected
             }
         });
 
-        dialog.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
+        builder.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 dialogInterface.dismiss();
             }
         });
+        AlertDialog dialog = builder.create();
         dialog.show();
     }
 }
