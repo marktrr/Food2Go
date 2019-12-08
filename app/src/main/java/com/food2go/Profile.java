@@ -44,14 +44,12 @@ public class Profile extends AppCompatActivity implements View.OnClickListener
     //Text Fields
     EditText txtFirstName;
     EditText txtLastName;
-    EditText txtEmail;
     EditText txtPhone;
     EditText txtPassword;
 
     //Labels
     TextView lblFirst;
     TextView lblLast;
-    TextView lblEmail;
     TextView lblPassword;
     TextView lblPhone;
 
