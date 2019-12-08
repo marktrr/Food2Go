@@ -46,12 +46,12 @@ public class SignIn extends AppCompatActivity implements View.OnClickListener {
     @Override
     public void onClick(View v)
     {
-        if (v.getId() == R.id.btnSubmitSignIn)
-        {
-            // set message for sign in process
-            final ProgressDialog dialog = new ProgressDialog(SignIn.this);
-            dialog.setMessage("Sign in...");
-            dialog.show();
+        if(validate() != false) {
+            if (v.getId() == R.id.btnSubmitSignIn) {
+                // set message for sign in process
+                final ProgressDialog dialog = new ProgressDialog(SignIn.this);
+                dialog.setMessage("Sign in...");
+                dialog.show();
 
                 users.addValueEventListener(new ValueEventListener() {
                     @Override
@@ -69,22 +69,39 @@ public class SignIn extends AppCompatActivity implements View.OnClickListener {
                                 Common.currentUser = user;
                                 startActivity(homeIntent);
                                 finish();
-                            }
-                            else
-                            {
+                            } else {
                                 Toast.makeText(SignIn.this, "Incorrect email or password", Toast.LENGTH_SHORT).show();
                             }
 
-                        }
-                        else {
+                        } else {
                             dialog.dismiss();
                             Toast.makeText(SignIn.this, "User not exist", Toast.LENGTH_SHORT).show();
                         }
                     }
+
                     @Override
                     public void onCancelled(DatabaseError databaseError) {
                     }
                 });
+            }
         }
+
+    }
+
+    //Check if fields are empty
+    public boolean validate(){
+     boolean isValid = true;
+
+        if (phoneNumber.getText().toString().isEmpty()) {
+            //please enter a first name
+            phoneNumber.setError("Phone number is required");
+            isValid = false;
+        }
+        if (password.getText().toString().isEmpty()) {
+            //please enter a first name
+            password.setError("Password is required");
+            isValid = false;
+        }
+     return  isValid;
     }
 }

@@ -28,6 +28,8 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Address extends AppCompatActivity implements Spinner.OnItemSelectedListener, View.OnClickListener {
     EditText address, postalCode;
@@ -68,14 +70,12 @@ public class Address extends AppCompatActivity implements Spinner.OnItemSelected
             cart = (List<Order>) args.getSerializable("arrayList");
         }
     }
-
     @Override
     public void onItemSelected(AdapterView<?> parent, View v, int position, long id) {
         ((TextView) v).setTextColor(Color.WHITE);
         if(parent.getId() == R.id.spinnerProvince){
             provinceStr = String.valueOf(parent.getItemAtPosition(position));
         }
-
     }
 
     @Override
@@ -85,10 +85,12 @@ public class Address extends AppCompatActivity implements Spinner.OnItemSelected
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.btnPlaceOrder:
-                showDialog();
-                break;
+        if(validation() != false) {
+            switch (v.getId()) {
+                case R.id.btnPlaceOrder:
+                    showDialog();
+                    break;
+            }
         }
     }
 
@@ -127,5 +129,35 @@ public class Address extends AppCompatActivity implements Spinner.OnItemSelected
             }
         });
         dialog.show();
+    }
+    public boolean validation(){
+        boolean isValid = true;
+
+        Pattern pattern;
+        Matcher match;
+        //phone number Regex Pattern
+        //1-519-111-1111
+        String postalCode_regex = "^(?!.*[DFIOQU])[A-VXY][0-9][A-Z]●?[0-9][A-Z][0-9]$";
+
+        if (address.getText().toString().isEmpty()) {
+            //please enter an email
+            address.setError("Address is required");
+            isValid = false;
+        }
+        if(postalCode.getText().toString().isEmpty())
+        {
+            postalCode.setError("Postal Code is required");
+            isValid = false;
+        }
+        else {
+            pattern = Pattern.compile(postalCode_regex);
+            match = pattern.matcher(postalCode.getText().toString());
+            if (!match.matches()) {
+                postalCode.setError("Must be a valid Canadian Postal Code");
+                isValid = false;
+            }
+        }
+
+        return  isValid;
     }
 }
