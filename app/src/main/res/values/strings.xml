@@ -24,7 +24,7 @@
     <string name="user_avatar">User\'s Avatar</string>
     <string name="edit_profile">Edit Profile</string>
     <string name="email_label">Email:</string>
-    <string name="first_name">First Name:</string>
+    <string name="user_name">Username:</string>
     <string name="last_name">Last Name:</string>
     <string name="save">Save</string>
 </resources>

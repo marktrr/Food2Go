@@ -12,10 +12,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ImageSwitcher;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.food2go.Common.Common;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -25,6 +25,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Objects;
 
+import androidx.activity.ComponentActivity;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.FileProvider;
 
@@ -35,68 +36,70 @@ public class Profile extends AppCompatActivity implements View.OnClickListener
     private static final byte GALLERY_REQUEST_CODE = 100;
     private static final byte CAMERA_REQUEST_CODE = 101;
 
-
     //Buttons
     ImageButton btnAvatar;
-    Button btnEditProfile;
     Button btnSave;
 
     //Text Fields
-    EditText txtFirstName;
-    EditText txtLastName;
+    EditText txtUserName;
     EditText txtPhone;
     EditText txtPassword;
 
     //Labels
-    TextView lblFirst;
-    TextView lblLast;
+    TextView lblUsername;
     TextView lblPassword;
     TextView lblPhone;
 
     //Database
     DatabaseReference db = FirebaseDatabase.getInstance().getReference();
 
+    //User Info
+    String currentUser = Common.currentUser.toString();
+    String userID = Common.currentUser.getId();
+    String userPhone = Common.currentUser.getPhoneNumber();
+    protected String userPassword = Common.currentUser.getPassword();
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
         //Labels
-        lblFirst = findViewById(R.id.first_name_label);
-        lblLast = findViewById(R.id.last_name_label);
+        lblUsername = findViewById(R.id.user_name_label);
         lblPhone = findViewById(R.id.phone_label);
         lblPassword = findViewById(R.id.password_label);
 
         //Text Fields
-        txtFirstName = findViewById(R.id.editFirstName);
-        txtLastName = findViewById(R.id.editLastName);
         txtPhone = findViewById(R.id.editPhone);
         txtPassword = findViewById(R.id.editPassword);
+        txtUserName = findViewById(R.id.editUserName);
 
-        txtFirstName.setEnabled(false);
-        txtLastName.setEnabled(false);
-        txtPhone.setEnabled(false);
-        txtPassword.setEnabled(false);
+        //Set Text
+        txtUserName.setText(userID);
+        txtPhone.setText(userPhone);
+        txtPassword.setText(userPassword);
 
         //Buttons
         btnAvatar = findViewById(R.id.avatar);
         btnAvatar.setOnClickListener(this);
-        btnEditProfile = findViewById(R.id.edit);
-        btnEditProfile.setOnClickListener(this);
         btnSave = findViewById(R.id.save);
         btnSave.setOnClickListener(this);
     }
 
+    public void NullMediaException() throws Exception {
+        throw new Exception("Media not found!");
+    }
+
     private void SaveUser()
     {
-        db.child("Users").child(txtPhone.getText().toString()).child("id").setValue(txtFirstName.getText().toString());
-        db.child("Users").child(txtPhone.getText().toString()).child("phone").setValue(Integer.parseInt(txtPhone.getText().toString()));
-        db.child("Users").child(txtPhone.getText().toString()).child("password").setValue(txtPassword.getText().toString());
+        db.child("Users").child(currentUser).child(userID).setValue(txtUserName.toString());
+        db.child("Users").child(currentUser).child(userPhone).setValue(Integer.parseInt(txtPhone.getText().toString()));
+        db.child("Users").child(currentUser).child(userPassword).setValue(txtPassword.getText().toString());
     }
     //Gallery
     private void PickFromGallery()
     {
         //Create an Intent with action as ACTION_PICK
-        Intent gallery_intent=new Intent(Intent.ACTION_PICK);
+        Intent gallery_intent= new Intent(Intent.ACTION_PICK);
         // Sets the type as image/*. This ensures only components of type image are selected
         gallery_intent.setType("image/*");
         //We pass an extra array with the accepted mime types. This will ensure only components with these MIME types as targeted.
@@ -174,13 +177,6 @@ public class Profile extends AppCompatActivity implements View.OnClickListener
             case R.id.avatar:
             {
                 PickFromGallery();
-            }
-            case R.id.edit:
-            {
-                txtPassword.isInEditMode();
-                txtPhone.isInEditMode();
-                txtFirstName.isInEditMode();
-                txtLastName.isInEditMode();
             }
             case R.id.save:
             {
