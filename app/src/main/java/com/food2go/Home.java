@@ -14,7 +14,7 @@ import com.food2go.Model.Category;
 import com.food2go.ViewHolder.MenuViewHolder;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
-
+import androidx.appcompat.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -168,6 +168,19 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
             Intent mainPage = new Intent(Home.this, MainActivity.class);
             mainPage.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(mainPage);
+        }
+        else if(id == R.id.nav_about_us) {
+            // setup the alert builder
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setTitle("About Restaurant");
+            builder.setMessage("Application developed by Hy Minh Tran, Kevin Lucas & Nathan Hannon.");
+
+            // add a button
+            builder.setPositiveButton("OK", null);
+
+            // create and show the alert dialog
+            AlertDialog dialog = builder.create();
+            dialog.show();
         }
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

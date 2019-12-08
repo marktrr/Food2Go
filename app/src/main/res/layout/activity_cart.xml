@@ -49,16 +49,7 @@
 
             <Button
                 android:id="@+id/btnNext"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:layout_marginLeft="8dp"
-                android:layout_marginRight="8dp"
-                android:layout_marginBottom="8dp"
-                android:background="@color/next"
-                android:text="Next"
-                android:textColor="@android:color/white"
-                android:textStyle="bold"/>
+                style="@style/btnNext"/>
         </RelativeLayout>
     </androidx.cardview.widget.CardView>
 </RelativeLayout>

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:alpha="0.5"
+    android:background="@drawable/background_delivery"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/street_label"
+            style="@style/txtViewAddressPage"
+            android:text="@string/shipping_address" />
+
+        <EditText
+            android:id="@+id/editAddress"
+            style="@style/edtTextAddressPage" />
+
+        <TextView
+            android:id="@+id/province_label"
+            style="@style/txtViewAddressPage"
+            android:text="@string/province"/>
+
+        <Spinner
+            android:id="@+id/spinnerProvince"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="@color/black"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:textSize="30sp"
+            android:spinnerMode="dropdown"/>
+
+        <TextView
+            android:id="@+id/postalCode_label"
+            style="@style/txtViewAddressPage"
+            android:text="@string/postalCode" />
+
+        <EditText
+            android:id="@+id/editPostalCode"
+            style="@style/edtTextAddressPage" />
+
+        <TextView
+            style="@style/txtViewAddressPage"
+            android:layout_marginTop="20dp"
+            android:text="Payment method (only accept cash):" />
+
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="1"
+            android:id="@+id/radioGroup"
+            android:layout_marginTop="10dp">
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Cash On Delivery"
+                android:id="@+id/radioCash"
+                android:checked="false"
+                android:textSize="20dp" />
+        </RadioGroup>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btnPlaceOrder"
+        style="@style/btnPlaceOrder"></Button>
+
+</RelativeLayout>
