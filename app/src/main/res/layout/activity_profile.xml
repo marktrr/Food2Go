@@ -14,13 +14,14 @@
 
         <ImageButton
             android:id="@+id/avatar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="150sp"
+            android:layout_height="150sp"
             android:layout_marginTop="48dp"
             android:layout_marginBottom="54dp"
             android:background="?attr/colorPrimary"
             android:contentDescription="@string/user_avatar"
             android:hapticFeedbackEnabled="false"
+            android:src="@drawable/profile_placeholder"
             android:visibility="visible"
             app:layout_constraintBottom_toTopOf="@+id/editFirstName"
             app:layout_constraintEnd_toEndOf="parent"
@@ -29,8 +30,6 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:layout_conversion_absoluteHeight="128dp"
             tools:layout_conversion_absoluteWidth="128dp"
-            tools:src="@tools:sample/avatars"
-            tools:srcCompat="@tools:sample/avatars[0]"
             tools:visibility="visible" />
 
         <EditText
