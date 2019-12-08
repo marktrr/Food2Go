@@ -90,7 +90,6 @@ public class Profile extends AppCompatActivity implements View.OnClickListener
 
     private void SaveUser()
     {
-
         db.child("Users").child("profile").child("id").setValue(txtFirstName.getText().toString());
         db.child("Users").child("profile").child("last name").setValue(txtLastName.getText().toString());
         db.child("Users").child("profile").child("phone").setValue(Integer.parseInt(txtPhone.getText().toString()));
