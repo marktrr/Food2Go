@@ -24,8 +24,6 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Objects;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.FileProvider;
@@ -67,35 +65,29 @@ public class Profile extends AppCompatActivity implements View.OnClickListener
         //Labels
         lblFirst = findViewById(R.id.first_name_label);
         lblLast = findViewById(R.id.last_name_label);
-        lblEmail = findViewById(R.id.email_label);
         lblPhone = findViewById(R.id.phone_label);
         lblPassword = findViewById(R.id.password_label);
 
         //Text Fields
         txtFirstName = findViewById(R.id.editFirstName);
         txtLastName = findViewById(R.id.editLastName);
-        txtEmail = findViewById(R.id.editEmail);
         txtPhone = findViewById(R.id.editPhone);
-        txtPassword = findViewById(R.id.updatePassword);
+        txtPassword = findViewById(R.id.editPassword);
 
         txtFirstName.setEnabled(false);
         txtLastName.setEnabled(false);
-        txtEmail.setEnabled(false);
         txtPhone.setEnabled(false);
         txtPassword.setEnabled(false);
 
         //Buttons
         btnAvatar = findViewById(R.id.avatar);
         btnAvatar.setOnClickListener(this);
-        btnEditProfile = findViewById(R.id.editProfile);
-        btnEditProfile.setOnClickListener(this);
         btnSave = findViewById(R.id.save);
         btnSave.setOnClickListener(this);
     }
 
     private void SaveUser()
     {
-        db.child("Users").child("profile").child("email").setValue(txtEmail.getText().toString());
         db.child("Users").child("profile").child("first name").setValue(txtFirstName.getText().toString());
         db.child("Users").child("profile").child("last name").setValue(txtLastName.getText().toString());
         db.child("Users").child("profile").child("phone").setValue(Integer.parseInt(txtPhone.getText().toString()));
@@ -184,109 +176,12 @@ public class Profile extends AppCompatActivity implements View.OnClickListener
             {
                 PickFromGallery();
             }
-            case R.id.editProfile:
-            {
-                txtFirstName.setEnabled(true);
-                txtLastName.setEnabled(true);
-                txtEmail.setEnabled(true);
-                txtPhone.setEnabled(true);
-                txtPassword.setEnabled(true);
-            }
             case R.id.save:
             {
-                if(validatedForm() != false) {
-                    txtFirstName.setEnabled(false);
-                    txtLastName.setEnabled(false);
-                    txtEmail.setEnabled(false);
-                    txtPhone.setEnabled(false);
-                    txtPassword.setEnabled(false);
-                    SaveUser();
-                    Toast.makeText(Profile.this, "Saved!", Toast.LENGTH_SHORT).show();
-
-                }
+                SaveUser();
+                Toast.makeText(Profile.this, "Saved!", Toast.LENGTH_SHORT).show();
             }
         }
-    }
-    //validation for the profile form.
-    public boolean validatedForm() {
-
-        boolean isValid = true;
-
-        //email regex pattern
-        String email_regex = "^[A-Za-z0-9+_.-]+@[a-z]{2,}+.[a-z]{2,}$";
-        Pattern pattern;
-        Matcher match;
-
-        //phone number Regex Pattern
-        //1-519-111-1111
-        String phone_regex = "(\\d-)?\\d{3}-\\d{3}-\\d{4}";
-
-        //password Regex Pattern
-        String password_regex = "((?=.*[a-z])(?=.*d)(?=.*[@#!$%])(?=.*[A-Z]).{6,35})";
-
-        //check if any fields are empt
-        if (txtFirstName.getText().toString().isEmpty()) {
-            //please enter a first name
-            txtFirstName.setError("First Name is required");
-            isValid = false;
-        } else {
-            //make sure the name is longer than minuim length.
-            if (txtFirstName.getText().toString().trim().length() < 3) {
-                txtFirstName.setError("First Name must be longer than 3 characters");
-                isValid = false;
-            }
-        }
-        if (txtLastName.getText().toString().isEmpty()) {
-            //please enter a first name
-            txtLastName.setError("Last Name is required");
-            isValid = false;
-        } else {
-            //make sure the name length is longer than minimum length.
-            if (txtLastName.getText().toString().trim().length() < 2) {
-                txtLastName.setError("Last name must be longer than 2 characters");
-                isValid = false;
-            }
-        }
-        if (txtEmail.getText().toString().isEmpty()) {
-            //please enter an email
-            txtEmail.setError("Email is required");
-            isValid = false;
-
-        } else {
-            pattern = Pattern.compile(email_regex);
-            match = pattern.matcher(txtEmail.getText().toString());
-            if (!match.matches()) {
-                txtEmail.setError("Email is invalid");
-                isValid = false;
-            }
-        }
-        if (txtPhone.getText().toString().isEmpty()) {
-            //please enter an email
-            txtPhone.setError("Phone number is required");
-            isValid = false;
-
-        } else {
-            pattern = Pattern.compile(phone_regex);
-            match = pattern.matcher(txtPhone.getText().toString());
-            if (!match.matches()) {
-                txtPhone.setError("Phone needs to be in XXX-XXX-XXXX format");
-                isValid = false;
-            }
-        }
-        if (txtPassword.getText().toString().isEmpty()) {
-            txtPassword.setError("Password is required");
-            isValid = false;
-
-        } else {
-            pattern = Pattern.compile(password_regex);
-            match = pattern.matcher(txtPassword.getText().toString());
-            if (!match.matches()) {
-                txtPassword.setError("Password must contain at least one lowercase" +
-                        " letter, digit, special char, capital, and be between 6 to 16 letters ");
-                isValid = false;
-            }
-        }
-        return isValid;
     }
 }
 
