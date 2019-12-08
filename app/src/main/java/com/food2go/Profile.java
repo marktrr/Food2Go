@@ -82,13 +82,16 @@ public class Profile extends AppCompatActivity implements View.OnClickListener
         //Buttons
         btnAvatar = findViewById(R.id.avatar);
         btnAvatar.setOnClickListener(this);
+        btnEditProfile = findViewById(R.id.edit);
+        btnEditProfile.setOnClickListener(this);
         btnSave = findViewById(R.id.save);
         btnSave.setOnClickListener(this);
     }
 
     private void SaveUser()
     {
-        db.child("Users").child("profile").child("first name").setValue(txtFirstName.getText().toString());
+
+        db.child("Users").child("profile").child("id").setValue(txtFirstName.getText().toString());
         db.child("Users").child("profile").child("last name").setValue(txtLastName.getText().toString());
         db.child("Users").child("profile").child("phone").setValue(Integer.parseInt(txtPhone.getText().toString()));
         db.child("Users").child("profile").child("password").setValue(txtPassword.getText().toString());
@@ -175,6 +178,13 @@ public class Profile extends AppCompatActivity implements View.OnClickListener
             case R.id.avatar:
             {
                 PickFromGallery();
+            }
+            case R.id.edit:
+            {
+                txtPassword.isInEditMode();
+                txtPhone.isInEditMode();
+                txtFirstName.isInEditMode();
+                txtLastName.isInEditMode();
             }
             case R.id.save:
             {
