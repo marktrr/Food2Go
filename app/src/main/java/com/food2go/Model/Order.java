@@ -10,17 +10,15 @@ public class Order extends HashMap<String, String> {
     private String productName;
     private int quantity;
     private double price;
-    private String discount;
+    private String userPhone;
 
-    public Order() {
-    }
 
-    public Order(String productId, String productName, int quantity, double price, String discount) {
+    public Order(String productId, String productName, int quantity, double price, String userPhone) {
         this.productId = productId;
         this.productName = productName;
         this.quantity = quantity;
         this.price = price;
-        this.discount = discount;
+        this.userPhone = userPhone;
     }
 
     public String getProductId() {
@@ -55,11 +53,11 @@ public class Order extends HashMap<String, String> {
         this.price = price;
     }
 
-    public String getDiscount() {
-        return discount;
+    public void setUserPhone(String userPhone) {
+        this.userPhone = userPhone;
     }
 
-    public void setDiscount(String discount) {
-        this.discount = discount;
+    public String getUserPhone() {
+        return userPhone;
     }
 }

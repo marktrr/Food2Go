@@ -14,7 +14,7 @@ import com.food2go.Model.Category;
 import com.food2go.ViewHolder.MenuViewHolder;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
-
+import androidx.appcompat.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -37,7 +37,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.ViewGroup;
+import android.widget.CheckBox;
 import android.widget.TextView;
+
+import io.paperdb.Paper;
 
 public class Home extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -85,6 +88,7 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
         View headerView = navigationView.getHeaderView(0);
         txtViewName = headerView.findViewById(R.id.txtViewName);
         txtViewName.setText(Common.currentUser.getId());
+
 
         // Load menu
         recycler_menu = findViewById(R.id.recycler_menu);
@@ -137,7 +141,7 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-            super.onBackPressed();
+
         }
     }
 
@@ -150,17 +154,33 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
             startActivity(new Intent(Home.this, Home.class));
         }
         else if (id == R.id.nav_current_orders) {
-         startActivity(new Intent(Home.this, Cart.class));
+            startActivity(new Intent(Home.this, Cart.class));
         }
         else if (id == R.id.nav_order_history) {
-
+            startActivity(new Intent(Home.this, OrderHistory.class));
         }
         else if (id == R.id.nav_profile) {
             Intent profileIntent = new Intent(getApplicationContext(), Profile.class);
             startActivity(profileIntent);
         }
         else if (id == R.id.nav_log_out) {
+            Paper.book().destroy(); // delete member
+            Intent mainPage = new Intent(Home.this, MainActivity.class);
+            mainPage.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(mainPage);
+        }
+        else if(id == R.id.nav_about_us) {
+            // setup the alert builder
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setTitle("About Restaurant");
+            builder.setMessage("Application developed by Hy Minh Tran, Kevin Lucas & Nathan Hannon.");
 
+            // add a button
+            builder.setPositiveButton("OK", null);
+
+            // create and show the alert dialog
+            AlertDialog dialog = builder.create();
+            dialog.show();
         }
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

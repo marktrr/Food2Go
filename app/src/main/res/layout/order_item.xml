@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="8dp"
     android:elevation="4dp"
     android:orientation="vertical">
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -21,41 +21,50 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/cart_item_name"
+                android:id="@+id/order_id"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:gravity="center_vertical|start"
-                android:text="Food Item"
                 android:textSize="20dp"
+                android:text="#123456"
                 android:textAllCaps="true"
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/cart_item_price"
+                android:id="@+id/order_address"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
+                android:textSize="15dp"
                 android:gravity="center_vertical|start"
-                android:text="0000000"
-                android:textSize="20dp"
+                android:text="Address"
                 android:textAllCaps="true"
-                android:textStyle="bold|italic" />
+                android:textStyle="italic" />
+
+            <TextView
+                android:id="@+id/order_phone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:textSize="15dp"
+                android:gravity="center_vertical|start"
+                android:text="0000000000"
+                android:textAllCaps="true"
+                android:textStyle="italic" />
         </LinearLayout>
 
-        <ImageView
-            android:id="@+id/cart_item_count"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_gravity="center_vertical|end"
-            android:layout_marginRight="20dp" />
 
-        <Button
-            android:id="@+id/btnRemoveItem"
-            android:layout_height="wrap_content"
-            android:text="Remove"
-            android:background="@color/red"
+        <TextView
+            android:id="@+id/order_status"
             android:layout_width="wrap_content"
-            android:fontFamily="@font/ubuntu" />
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:gravity="center_vertical|start"
+            android:textSize="15dp"
+            android:layout_marginTop="20dp"
+            android:text="Status"
+            android:textAllCaps="true"
+            android:textStyle="italic" />
     </LinearLayout>
 </androidx.cardview.widget.CardView>

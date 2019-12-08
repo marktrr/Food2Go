@@ -7,9 +7,10 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteQueryBuilder;
+
+import com.food2go.Common.Common;
 import com.readystatesoftware.sqliteasset.SQLiteAssetHelper;
 import com.food2go.Model.Order;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,7 +28,7 @@ public class OrderDB extends SQLiteAssetHelper{
         SQLiteDatabase db = getReadableDatabase();
         SQLiteQueryBuilder qb = new SQLiteQueryBuilder();
 
-        String[] sqlSelect = {"productID", "productName","quantity", "price", "discount"};
+        String[] sqlSelect = {"productID", "productName","quantity", "price", "userPhone"};
         String sqlTable = "orderDetails";
 
         qb.setTables(sqlTable);
@@ -40,7 +41,7 @@ public class OrderDB extends SQLiteAssetHelper{
                         c.getString(c.getColumnIndex("productName")),
                         c.getInt(c.getColumnIndex("quantity")),
                         c.getDouble(c.getColumnIndex("price")),
-                        c.getString(c.getColumnIndex("discount"))
+                        c.getString(c.getColumnIndex("userPhone"))
                 ));
             }while (c.moveToNext());
         }
@@ -49,12 +50,18 @@ public class OrderDB extends SQLiteAssetHelper{
 
     public void addToCart(Order order) {
         SQLiteDatabase db = getReadableDatabase();
-        String query = String.format("INSERT INTO orderDetails(productID,productName,quantity,price,discount) VALUES ('%s','%s','%s','%s','%s');",
+        String query = String.format("INSERT INTO orderDetails(productID,productName,quantity,price,userPhone) VALUES ('%s','%s','%s','%s', '%s');",
                 order.getProductId(),
                 order.getProductName(),
                 Integer.parseInt(String.valueOf(order.getQuantity())),
                 Double.parseDouble(String.valueOf(order.getPrice())),
-                order.getDiscount());
+                Common.currentUser.getId());
+        db.execSQL(query);
+    }
+
+    public void removeFromCart(String itemId, String userId) {
+        SQLiteDatabase db = getReadableDatabase();
+        String query = String.format("DELETE FROM orderDetails WHERE productID='%s' AND userPhone='%s'", itemId, userId);
         db.execSQL(query);
     }
 
