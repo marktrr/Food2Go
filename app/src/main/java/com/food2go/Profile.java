@@ -90,10 +90,9 @@ public class Profile extends AppCompatActivity implements View.OnClickListener
 
     private void SaveUser()
     {
-        db.child("Users").child("profile").child("id").setValue(txtFirstName.getText().toString());
-        db.child("Users").child("profile").child("last name").setValue(txtLastName.getText().toString());
-        db.child("Users").child("profile").child("phone").setValue(Integer.parseInt(txtPhone.getText().toString()));
-        db.child("Users").child("profile").child("password").setValue(txtPassword.getText().toString());
+        db.child("Users").child(txtPhone.getText().toString()).child("id").setValue(txtFirstName.getText().toString());
+        db.child("Users").child(txtPhone.getText().toString()).child("phone").setValue(Integer.parseInt(txtPhone.getText().toString()));
+        db.child("Users").child(txtPhone.getText().toString()).child("password").setValue(txtPassword.getText().toString());
     }
     //Gallery
     private void PickFromGallery()
