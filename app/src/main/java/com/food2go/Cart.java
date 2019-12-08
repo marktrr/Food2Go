@@ -4,19 +4,27 @@ package com.food2go;
  */
 
 import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.food2go.Common.Common;
 import com.food2go.DB.OrderDB;
 import com.food2go.Model.Order;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.food2go.Model.Reports;
 import com.food2go.ViewHolder.CartAdapter;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -32,22 +40,15 @@ public class Cart extends AppCompatActivity implements View.OnClickListener {
 
     RecyclerView recyclerView;
     RecyclerView.LayoutManager layoutManager;
-    FirebaseDatabase db;
-    DatabaseReference order;
     TextView totalPrice;
     Button btnNext;
     List<Order> cart = new ArrayList<Order>();
     CartAdapter adapter;
 
-    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cart);
-
-        // Firebase
-        db = FirebaseDatabase.getInstance();
-        order = db.getReference("Orders");
 
         //Init
         recyclerView = findViewById(R.id.listCart);

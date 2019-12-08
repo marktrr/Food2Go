@@ -109,7 +109,7 @@
             tools:layout_conversion_absoluteWidth="411dp" />
 
         <EditText
-            android:id="@+id/updateEmail"
+            android:id="@+id/editEmail"
             android:layout_width="410sp"
             android:layout_height="wrap_content"
             android:fontFamily="@font/ubuntu"
@@ -133,12 +133,12 @@
             app:layout_constraintBottom_toTopOf="@+id/editPhone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/updateEmail"
+            app:layout_constraintTop_toBottomOf="@+id/editEmail"
             tools:layout_conversion_absoluteHeight="26dp"
             tools:layout_conversion_absoluteWidth="54dp" />
 
         <EditText
-            android:id="@+id/updatePhone"
+            android:id="@+id/editPhone"
             android:layout_width="410sp"
             android:layout_height="wrap_content"
             android:fontFamily="@font/ubuntu"
