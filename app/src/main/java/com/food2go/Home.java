@@ -37,7 +37,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.ViewGroup;
+import android.widget.CheckBox;
 import android.widget.TextView;
+
+import io.paperdb.Paper;
 
 public class Home extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -85,6 +88,7 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
         View headerView = navigationView.getHeaderView(0);
         txtViewName = headerView.findViewById(R.id.txtViewName);
         txtViewName.setText(Common.currentUser.getId());
+
 
         // Load menu
         recycler_menu = findViewById(R.id.recycler_menu);
@@ -137,7 +141,7 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-            super.onBackPressed();
+
         }
     }
 
@@ -160,6 +164,7 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
             startActivity(profileIntent);
         }
         else if (id == R.id.nav_log_out) {
+            Paper.book().destroy(); // delete member
             Intent mainPage = new Intent(Home.this, MainActivity.class);
             mainPage.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(mainPage);

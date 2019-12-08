@@ -13,6 +13,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.view.View;
 import android.widget.SpinnerAdapter;
@@ -33,6 +34,7 @@ public class Address extends AppCompatActivity implements Spinner.OnItemSelected
     EditText address, postalCode;
     Spinner province;
     Button btnPlaceOrder;
+    RadioButton radioCash;
     final String[] provinceList = {"ON", "BC", "QC", "AB", "NS", "NB", "MB", "PE", "SK", "NL", "NT", "YT", "NU"};
     String provinceStr;
     String totalPrice;
@@ -49,6 +51,7 @@ public class Address extends AppCompatActivity implements Spinner.OnItemSelected
         postalCode = (EditText) findViewById(R.id.editPostalCode);
         province = (Spinner) findViewById(R.id.spinnerProvince);
         btnPlaceOrder = (Button) findViewById(R.id.btnPlaceOrder);
+        radioCash = findViewById(R.id.radioCash);
 
         // Firebase
         db = FirebaseDatabase.getInstance();
@@ -75,7 +78,6 @@ public class Address extends AppCompatActivity implements Spinner.OnItemSelected
         if(parent.getId() == R.id.spinnerProvince){
             provinceStr = String.valueOf(parent.getItemAtPosition(position));
         }
-
     }
 
     @Override
@@ -87,7 +89,12 @@ public class Address extends AppCompatActivity implements Spinner.OnItemSelected
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btnPlaceOrder:
-                showDialog();
+                if(radioCash.isChecked()) {
+                    showDialog();
+                }
+                else {
+                    Toast.makeText(Address.this, "Please select payment method", Toast.LENGTH_SHORT).show();
+                }
                 break;
         }
     }
@@ -115,8 +122,8 @@ public class Address extends AppCompatActivity implements Spinner.OnItemSelected
                 //clean cart
                 new OrderDB(getBaseContext()).clearCart();
                 Toast.makeText(Address.this, "Order place successfully.", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(Address.this, Home.class));
                 finish();
-                startActivity(getIntent());
             }
         });
 

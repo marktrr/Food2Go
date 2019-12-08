@@ -14,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.cepheuen.elegantnumberbutton.view.ElegantNumberButton;
+import com.food2go.Common.Common;
 import com.food2go.DB.OrderDB;
 import com.food2go.Model.Food;
 import com.food2go.Model.Order;
@@ -99,7 +100,7 @@ public class FoodDetail extends AppCompatActivity implements View.OnClickListene
                     currentItem.getName(),
                     Integer.parseInt(btnQuantity.getNumber()),
                     Double.parseDouble(currentItem.getPrice()),
-                    currentItem.getDiscount()
+                    Common.currentUser.getId()
             ));
             Toast.makeText(FoodDetail.this, "Added to Cart", Toast.LENGTH_SHORT).show();
         }

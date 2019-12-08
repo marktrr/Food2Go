@@ -49,5 +49,13 @@
             android:layout_height="20dp"
             android:layout_gravity="center_vertical|end"
             android:layout_marginRight="20dp" />
+
+        <Button
+            android:id="@+id/btnRemoveItem"
+            android:layout_height="wrap_content"
+            android:text="Remove"
+            android:background="@color/red"
+            android:layout_width="wrap_content"
+            android:fontFamily="@font/ubuntu" />
     </LinearLayout>
 </androidx.cardview.widget.CardView>
