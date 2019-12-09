@@ -159,10 +159,6 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
         else if (id == R.id.nav_order_history) {
             startActivity(new Intent(Home.this, OrderHistory.class));
         }
-        else if (id == R.id.nav_profile) {
-            Intent profileIntent = new Intent(getApplicationContext(), Profile.class);
-            startActivity(profileIntent);
-        }
         else if (id == R.id.nav_log_out) {
             Paper.book().destroy(); // delete member
             Intent mainPage = new Intent(Home.this, MainActivity.class);
