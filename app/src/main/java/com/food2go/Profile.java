@@ -21,13 +21,17 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 import java.util.Objects;
 
 import androidx.activity.ComponentActivity;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.FileProvider;
+
+import static java.util.Locale.CANADA;
 
 public class Profile extends AppCompatActivity implements View.OnClickListener
 {
@@ -157,8 +161,8 @@ public class Profile extends AppCompatActivity implements View.OnClickListener
     private File createImageFile() throws IOException
     {
         // Create an image file name
-        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-        String imageFileName = "JPEG_" + timeStamp + "_";
+        DateFormat timeStamp = DateFormat.getDateInstance(DateFormat.LONG, CANADA);
+        String imageFileName = "JPEG_" + timeStamp.toString() + "_";
         //This is the directory in which the file will be created. This is the default location of Camera photos
         File storageDir = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM), "Camera");
         File image = File.createTempFile(
