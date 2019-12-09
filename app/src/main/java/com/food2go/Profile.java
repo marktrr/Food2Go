@@ -49,28 +49,12 @@ public class Profile extends AppCompatActivity implements View.OnClickListener
     EditText txtEmail;
     EditText txtPhone;
     EditText txtPassword;
-
-    //Labels
-    TextView lblFirst;
-    TextView lblLast;
-    TextView lblEmail;
-    TextView lblPassword;
-    TextView lblPhone;
-
     //Database
     DatabaseReference db = FirebaseDatabase.getInstance().getReference();
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
-
-        //Labels
-        lblFirst = findViewById(R.id.first_name_label);
-        lblLast = findViewById(R.id.last_name_label);
-        lblEmail = findViewById(R.id.email_label);
-        lblPhone = findViewById(R.id.phone_label);
-        lblPassword = findViewById(R.id.password_label);
-
         //Text Fields
         txtFirstName = findViewById(R.id.editFirstName);
         txtLastName = findViewById(R.id.editLastName);
