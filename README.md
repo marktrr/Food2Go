@@ -1,6 +1,6 @@
 # Food2Go (Available in Android Application)
 
-This is a book store application.
+This is a online order application.
 
 ## Getting Started 
 
